@@ -1,5 +1,11 @@
 # 🃏 Conquián Mexicano Online (2–6 Jugadores) 🇲🇽
 
+[![CI/CD](https://github.com/pinguxx/conquian/actions/workflows/ci.yml/badge.svg)](https://github.com/pinguxx/conquian/actions/workflows/ci.yml)
+[![Rust](https://img.shields.io/badge/Rust-1.80%2B-orange?logo=rust)](https://www.rust-lang.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://www.docker.com/)
+[![Render](https://img.shields.io/badge/Deploy-Render-46E3B7?logo=render)](https://render.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A real-time multiplayer web adaptation of the classic Mexican rummy card game **Conquián**, built with **Rust** (`Axum`, `Tokio`, `WebSockets`) and a responsive bilingual frontend supporting **2 to 6 players** with **Baraja Española** or **Poker** suits.
 
 ---
@@ -38,3 +44,27 @@ cargo run --release
 ```
 
 Open **[http://localhost:3000](http://localhost:3000)** in your browser (or connect phones on the same Wi-Fi network).
+
+---
+
+## 🐳 Docker & Render.com Deployment
+
+This repository includes an optimized multi-stage [Dockerfile](Dockerfile), a [.dockerignore](.dockerignore), and a [Render Blueprint (`render.yaml`)](render.yaml) configured with `healthCheckPath: /health` and dynamic `PORT` binding.
+
+### Deploy to Render.com (Recommended)
+
+1. Push or connect the `pinguxx/conquian` repository in your [Render Dashboard](https://dashboard.render.com).
+2. Create a new **Blueprint** (or **Web Service** with **Docker** runtime) — Render automatically detects `render.yaml`, builds the Docker image, and checks `/health`.
+
+### Build & Run Locally with Docker
+
+```bash
+docker build -t conquian:latest .
+docker run -p 3000:3000 conquian:latest
+```
+
+---
+
+## 📜 License
+
+MIT License — see [LICENSE](LICENSE).
