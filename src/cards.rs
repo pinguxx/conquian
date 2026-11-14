@@ -135,7 +135,7 @@ pub fn generate_deck(double_deck: bool) -> Vec<Card> {
         }
     }
 
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     cards.shuffle(&mut rng);
     cards
 }

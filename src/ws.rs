@@ -1,6 +1,6 @@
 use axum::extract::ws::{Message, WebSocket};
 use futures_util::{SinkExt, StreamExt};
-use rand::Rng;
+use rand::RngExt;
 use serde::Deserialize;
 use serde_json::{json, Value};
 use std::collections::HashMap;
@@ -146,7 +146,7 @@ pub fn send_event(tx: &mpsc::UnboundedSender<Message>, event_name: &str, data: V
         "data": data
     })
     .to_string();
-    let _ = tx.send(Message::Text(msg));
+    let _ = tx.send(Message::Text(msg.into()));
 }
 
 pub async fn broadcast_event(state: &AppState, room_code: &str, event_name: &str, data: Value) {
@@ -159,7 +159,7 @@ pub async fn broadcast_event(state: &AppState, room_code: &str, event_name: &str
     let sockets = state.sockets.read().await;
     if let Some(room_map) = sockets.get(room_code) {
         for tx in room_map.values() {
-            let _ = tx.send(Message::Text(msg.clone()));
+            let _ = tx.send(Message::Text(msg.clone().into()));
         }
     }
 }
@@ -250,7 +250,7 @@ pub async fn broadcast_room_state(state: &AppState, room_code: &str) {
     };
 
     for (tx, msg) in outbound {
-        let _ = tx.send(Message::Text(msg));
+        let _ = tx.send(Message::Text(msg.into()));
     }
 }
 
@@ -292,7 +292,7 @@ pub async fn maybe_drive_bots(state: AppState, room_code: String) {
                     .unwrap_or(1100)
             };
 
-            let jitter = rand::thread_rng().gen_range(0..350);
+            let jitter = rand::rng().random_range(0..350);
             tokio::time::sleep(tokio::time::Duration::from_millis(speed_ms + jitter)).await;
 
             // Verify this driver is still the latest active driver for this room & generation

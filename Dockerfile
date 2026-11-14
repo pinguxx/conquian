@@ -4,7 +4,7 @@
 # ==========================================
 
 # 1. Builder Stage
-FROM rust:1.83-slim-bookworm AS builder
+FROM rust:1-slim-bookworm AS builder
 WORKDIR /app
 
 # Install pkg-config if ever needed
