@@ -256,7 +256,12 @@ impl Room {
         }
     }
 
-    pub fn add_human_player(&mut self, player_id: String, name: String, conn_id: String) -> Result<(), String> {
+    pub fn add_human_player(
+        &mut self,
+        player_id: String,
+        name: String,
+        conn_id: String,
+    ) -> Result<(), String> {
         if self.players.len() >= 6 {
             return Err("Room is full (max 6 players)".to_string());
         }
@@ -299,7 +304,8 @@ impl Room {
             "🤖 El Santo Bot",
         ];
 
-        let existing_names: HashSet<&str> = self.players.values().map(|p| p.name.as_str()).collect();
+        let existing_names: HashSet<&str> =
+            self.players.values().map(|p| p.name.as_str()).collect();
         let bot_name = BOT_PROFILES
             .iter()
             .copied()
@@ -376,8 +382,7 @@ impl Room {
             return Err("Maximum 6 players supported".to_string());
         }
 
-        let (is_double, hand_size, target_meld) =
-            resolve_scaling(count, &self.settings.deck_mode);
+        let (is_double, hand_size, target_meld) = resolve_scaling(count, &self.settings.deck_mode);
 
         self.is_double_deck = is_double;
         self.hand_size = hand_size;
@@ -497,8 +502,16 @@ impl Room {
         self.phase = TurnPhase::ClaimingOffer;
         self.last_notice = Some(ActionNotice {
             kind: "flip".to_string(),
-            message_es: format!("{} volteó {}", actor_name, card_name_es(card.rank, card.suit)),
-            message_en: format!("{} flipped {}", actor_name, card_name_en(card.rank, card.suit)),
+            message_es: format!(
+                "{} volteó {}",
+                actor_name,
+                card_name_es(card.rank, card.suit)
+            ),
+            message_en: format!(
+                "{} flipped {}",
+                actor_name,
+                card_name_en(card.rank, card.suit)
+            ),
         });
 
         Ok(card)
@@ -679,7 +692,9 @@ impl Room {
             .ok_or_else(|| "Target player not found".to_string())?;
 
         if target.hand.is_empty() {
-            return Err("Cannot force a player who has no cards left in hand to discard".to_string());
+            return Err(
+                "Cannot force a player who has no cards left in hand to discard".to_string(),
+            );
         }
 
         let meld_idx = target
@@ -769,8 +784,14 @@ impl Room {
 
                 self.last_notice = Some(ActionNotice {
                     kind: "burn".to_string(),
-                    message_es: format!("Todos pasaron — {} fue a la basura. Turno de {}.", card_es, next_name),
-                    message_en: format!("Everyone passed — {} burned. {} flips next.", card_en, next_name),
+                    message_es: format!(
+                        "Todos pasaron — {} fue a la basura. Turno de {}.",
+                        card_es, next_name
+                    ),
+                    message_en: format!(
+                        "Everyone passed — {} burned. {} flips next.",
+                        card_en, next_name
+                    ),
                 });
             }
             return Ok(());
@@ -1011,7 +1032,12 @@ impl Room {
 
         match self.phase {
             TurnPhase::AwaitingFlip => {
-                if self.seat_order.get(self.current_turn_idx).map(|s| s.as_str()) == Some(bot_id) {
+                if self
+                    .seat_order
+                    .get(self.current_turn_idx)
+                    .map(|s| s.as_str())
+                    == Some(bot_id)
+                {
                     Some(BotAction::FlipStock)
                 } else {
                     None
@@ -1036,11 +1062,8 @@ impl Room {
                 let n = bot.hand.len();
                 for i in 0..n {
                     for j in (i + 1)..n {
-                        let candidate = vec![
-                            offered.clone(),
-                            bot.hand[i].clone(),
-                            bot.hand[j].clone(),
-                        ];
+                        let candidate =
+                            vec![offered.clone(), bot.hand[i].clone(), bot.hand[j].clone()];
                         if validate_meld(&candidate).is_some() {
                             let mut proposed: Vec<Vec<u8>> = bot
                                 .melds
@@ -1101,7 +1124,7 @@ impl Room {
     }
 }
 
-pub fn sort_hand_default(hand: &mut Vec<Card>) {
+pub fn sort_hand_default(hand: &mut [Card]) {
     hand.sort_by_key(|c| (c.suit, rank_order(c.rank).unwrap_or(255), c.id));
 }
 
@@ -1191,8 +1214,10 @@ mod tests {
             "Ana".to_string(),
             GameSettings::default(),
         );
-        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string()).unwrap();
-        room.add_human_player("p3".to_string(), "Carlos".to_string(), "c3".to_string()).unwrap();
+        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string())
+            .unwrap();
+        room.add_human_player("p3".to_string(), "Carlos".to_string(), "c3".to_string())
+            .unwrap();
         room.start_round().unwrap();
 
         assert_eq!(room.hand_size, 8);
@@ -1232,7 +1257,8 @@ mod tests {
                 turn_speed_ms: 1000,
             },
         );
-        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string()).unwrap();
+        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string())
+            .unwrap();
         room.start_round().unwrap();
         assert_eq!(room.pot, 20);
 
@@ -1299,7 +1325,8 @@ mod tests {
                 ..GameSettings::default()
             },
         );
-        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string()).unwrap();
+        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string())
+            .unwrap();
         room.start_round().unwrap();
         assert_eq!(room.pot, 20);
 
@@ -1332,7 +1359,8 @@ mod tests {
                 ..GameSettings::default()
             },
         );
-        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string()).unwrap();
+        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string())
+            .unwrap();
         room.start_round().unwrap();
 
         // Give P1 8 melded cards + 2 hand cards (total 10), target = 11
@@ -1358,7 +1386,8 @@ mod tests {
                 ],
             },
         ];
-        room.players.get_mut("p1").unwrap().hand = vec![card(5, Suit::Oros, 5), card(6, Suit::Oros, 6)];
+        room.players.get_mut("p1").unwrap().hand =
+            vec![card(5, Suit::Oros, 5), card(6, Suit::Oros, 6)];
         room.stock = vec![card(7, Suit::Oros, 7)];
         room.current_turn_idx = 0;
         room.phase = TurnPhase::AwaitingFlip;
@@ -1368,11 +1397,7 @@ mod tests {
             .apply_meld(
                 "p1",
                 &[5, 6],
-                &[
-                    vec![1, 11, 21, 31],
-                    vec![2, 12, 22, 32],
-                    vec![5, 6, 7],
-                ],
+                &[vec![1, 11, 21, 31], vec![2, 12, 22, 32], vec![5, 6, 7]],
                 None,
             )
             .unwrap();

@@ -174,12 +174,13 @@ pub fn validate_meld(cards: &[Card]) -> Option<(MeldKind, Vec<Card>)> {
         if cards.iter().all(|c| c.suit == first_suit) {
             let mut sorted = cards.to_vec();
             sorted.sort_by_key(|c| rank_order(c.rank).unwrap_or(255));
-            let is_consecutive = sorted.windows(2).all(|w| {
-                match (rank_order(w[0].rank), rank_order(w[1].rank)) {
-                    (Some(a), Some(b)) => b == a + 1,
-                    _ => false,
-                }
-            });
+            let is_consecutive =
+                sorted
+                    .windows(2)
+                    .all(|w| match (rank_order(w[0].rank), rank_order(w[1].rank)) {
+                        (Some(a), Some(b)) => b == a + 1,
+                        _ => false,
+                    });
             if is_consecutive {
                 return Some((MeldKind::Run, sorted));
             }
@@ -230,8 +231,10 @@ fn validate_meld_partition(
             group_cards.push(card.clone());
         }
 
-        let (kind, sorted) = validate_meld(&group_cards)
-            .ok_or_else(|| "Invalid meld: must be a valid set (tercia/cuarteta) or same-suit run (corrida)".to_string())?;
+        let (kind, sorted) = validate_meld(&group_cards).ok_or_else(|| {
+            "Invalid meld: must be a valid set (tercia/cuarteta) or same-suit run (corrida)"
+                .to_string()
+        })?;
         result_melds.push(Meld {
             id: make_meld_id(&sorted),
             kind,
@@ -240,7 +243,9 @@ fn validate_meld_partition(
     }
 
     if &seen_proposed != expected_ids {
-        return Err("Proposed melds do not conserve all existing meld cards and selected cards".to_string());
+        return Err(
+            "Proposed melds do not conserve all existing meld cards and selected cards".to_string(),
+        );
     }
 
     Ok(result_melds)
@@ -384,7 +389,10 @@ mod tests {
         assert!(res.is_some());
         let (kind, sorted) = res.unwrap();
         assert_eq!(kind, MeldKind::Run);
-        assert_eq!(sorted.iter().map(|x| x.rank).collect::<Vec<_>>(), vec![7, 10, 11]);
+        assert_eq!(
+            sorted.iter().map(|x| x.rank).collect::<Vec<_>>(),
+            vec![7, 10, 11]
+        );
 
         let run_ace = vec![
             c(13, Suit::Copas, 3),
@@ -393,7 +401,10 @@ mod tests {
         ];
         let res2 = validate_meld(&run_ace).unwrap();
         assert_eq!(res2.0, MeldKind::Run);
-        assert_eq!(res2.1.iter().map(|x| x.rank).collect::<Vec<_>>(), vec![1, 2, 3]);
+        assert_eq!(
+            res2.1.iter().map(|x| x.rank).collect::<Vec<_>>(),
+            vec![1, 2, 3]
+        );
 
         // Gap 7-11-12 without 10 is invalid
         let broken = vec![

@@ -540,8 +540,12 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                             player_name.trim().to_string()
                         };
                         let room_settings = settings.unwrap_or_default();
-                        let room =
-                            Room::new(code.clone(), conn_id_clone.clone(), clean_name, room_settings);
+                        let room = Room::new(
+                            code.clone(),
+                            conn_id_clone.clone(),
+                            clean_name,
+                            room_settings,
+                        );
 
                         {
                             let mut rooms = state_clone.rooms.write().await;
@@ -657,7 +661,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                         }
                         match result {
                             Ok(()) => broadcast_room_state(&state_clone, &room_code).await,
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -704,7 +710,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 broadcast_room_state(&state_clone, &room_code).await;
                                 maybe_drive_bots(state_clone.clone(), room_code).await;
                             }
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -723,7 +731,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 broadcast_room_state(&state_clone, &room_code).await;
                                 maybe_drive_bots(state_clone.clone(), room_code).await;
                             }
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -742,7 +752,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 broadcast_room_state(&state_clone, &room_code).await;
                                 maybe_drive_bots(state_clone.clone(), room_code).await;
                             }
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -771,7 +783,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 broadcast_room_state(&state_clone, &room_code).await;
                                 maybe_drive_bots(state_clone.clone(), room_code).await;
                             }
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -794,7 +808,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 broadcast_room_state(&state_clone, &room_code).await;
                                 maybe_drive_bots(state_clone.clone(), room_code).await;
                             }
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -817,7 +833,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 broadcast_room_state(&state_clone, &room_code).await;
                                 maybe_drive_bots(state_clone.clone(), room_code).await;
                             }
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -836,7 +854,9 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 broadcast_room_state(&state_clone, &room_code).await;
                                 maybe_drive_bots(state_clone.clone(), room_code).await;
                             }
-                            Err(e) => send_event(&tx_clone, "action_error", json!({ "message": e })),
+                            Err(e) => {
+                                send_event(&tx_clone, "action_error", json!({ "message": e }))
+                            }
                         }
                     }
 
@@ -880,7 +900,8 @@ pub async fn handle_ws_connection(socket: WebSocket, state: AppState) {
                                 if let Some(player) = room.players.get_mut(&player_id) {
                                     player.connected = true;
                                     player.conn_id = conn_id_clone.clone();
-                                    restored_payload = Some(build_player_state_payload(room, &player_id));
+                                    restored_payload =
+                                        Some(build_player_state_payload(room, &player_id));
                                 }
                             }
                         }
