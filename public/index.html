@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>¡Conquián Mexicano Online!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f59e0b">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Conquián">
+</head>
+<body class="theme-cantina">
+
+  <!-- Ambient Floating Decorations Layer -->
+  <div id="ambient-theme-layer" class="ambient-theme-layer" aria-hidden="true"></div>
+
+  <!-- Papel Picado Festive Banner -->
+  <div class="papel-picado" aria-hidden="true">
+    <div class="papel-flag"></div>
+    <div class="papel-flag"></div>
+    <div class="papel-flag"></div>
+    <div class="papel-flag"></div>
+    <div class="papel-flag"></div>
+    <div class="papel-flag"></div>
+    <div class="papel-flag"></div>
+    <div class="papel-flag"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="logo-container">
+      <span class="logo-badge">🃏</span>
+      <div class="logo-text">
+        <h1>CONQUIÁN</h1>
+        <span data-i18n="appSubtitle">Mexican Rummy • 2–6 Players</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="btn-header-leave" class="btn-icon header-leave-btn" style="display: none;" title="Leave Room / Salir">🚪 <span data-i18n="leaveRoom">Leave</span></button>
+      <button id="btn-pwa-install" class="btn-icon" style="display: none;" title="Install App / Instalar App">📲</button>
+      <button id="btn-toggle-deck-style" class="btn-icon btn-pill" title="Toggle Baraja Española / Poker Suits">🎴 Baraja</button>
+      <button id="btn-rules" class="btn-icon" title="Rules / Reglas">📖</button>
+      <button id="btn-toggle-theme" class="btn-icon" title="Theme / Tema">🎨</button>
+      <button id="btn-toggle-lang" class="btn-icon btn-pill" title="Switch Language / Cambiar Idioma">🌐 Español</button>
+      <button id="btn-toggle-sound" class="btn-icon" title="Sound Effects / Efectos">🔊</button>
+      <button id="btn-toggle-speech" class="btn-icon" title="Voice Announcements / Voz" style="opacity: 0.55;">🗣️</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- 1. WELCOME / JOIN SCREEN -->
+    <section id="screen-welcome" class="screen active">
+      <div id="resume-banner" class="resume-banner" style="display: none;">
+        <div class="resume-info">
+          <span class="resume-icon">🃏</span>
+          <div>
+            <div class="resume-title" data-i18n="resumeTitle">Game in Progress</div>
+            <div class="resume-sub">
+              <span data-i18n="roomTag">ROOM:</span> <strong id="resume-room-code" style="color: #fde047; letter-spacing: 1.5px;">-----</strong> • <span id="resume-player-name">Player</span>
+            </div>
+          </div>
+        </div>
+        <div class="resume-actions">
+          <button id="btn-resume-game" class="btn-primary resume-btn" data-i18n="btnResume">▶️ Resume</button>
+          <button id="btn-dismiss-resume" class="btn-icon resume-dismiss" title="Dismiss">✖</button>
+        </div>
+      </div>
+
+      <div class="welcome-card">
+        <div class="welcome-hero">
+          <span class="hero-suits">🪙 🏆 ⚔️ 🪵</span>
+          <h2 data-i18n="welcomeTitle">¡Juega Conquián en Mesa Multijugador!</h2>
+          <p data-i18n="welcomeDesc">De 2 a 6 jugadores con Baraja Española, tercias, corridas, ¡Obligado! y Pozo acumulado.</p>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" id="tab-create" data-i18n="tabCreate">Create Room</button>
+          <button class="tab-btn" id="tab-join" data-i18n="tabJoin">Join Room</button>
+        </div>
+
+        <!-- Create Form -->
+        <form id="form-create">
+          <div class="form-group">
+            <label for="create-name" data-i18n="labelName">Your Name or Nickname</label>
+            <input type="text" id="create-name" class="form-control" placeholder="e.g. Don Pancho" data-i18n-ph="placeholderHost" maxlength="18" required autofocus>
+          </div>
+
+          <div class="form-group">
+            <label for="create-deck-mode" data-i18n="labelDeckMode">Deck & Hand Scaling (2–6 Players)</label>
+            <select id="create-deck-mode" class="form-control">
+              <option value="auto" selected data-i18n="deckAuto">✨ Auto-Scale (1 deck 2–3p, 2 decks 4–6p)</option>
+              <option value="single" data-i18n="deckSingle">🃏 Single 40-Card Deck (2p:10, 3p:8, 4p:7 cards)</option>
+              <option value="double" data-i18n="deckDouble">🎴 Double 80-Card Deck (Always 10 cards, meld 11)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1;">
+              <label for="create-chips" data-i18n="labelChips">Betting Chips / El Pozo</label>
+              <select id="create-chips" class="form-control">
+                <option value="0" data-i18n="chipsOff">🚫 Free Play (No Chips)</option>
+                <option value="5" selected data-i18n="chips5">💰 5 Fichas Buy-in</option>
+                <option value="10" data-i18n="chips10">💰 10 Fichas Buy-in</option>
+                <option value="20" data-i18n="chips20">💰 20 Fichas Buy-in</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label for="create-speed" data-i18n="labelBotSpeed">Bot Turn Pace</label>
+              <select id="create-speed" class="form-control">
+                <option value="750" data-i18n="speedFast">⚡ Fast</option>
+                <option value="1200" selected data-i18n="speedNormal">⏱️ Normal</option>
+                <option value="1800" data-i18n="speedRelaxed">☕ Relaxed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 8px;">
+            <label class="checkbox-label">
+              <input type="checkbox" id="create-obligado" checked>
+              <span data-i18n="labelObligado">⚡ Enable "¡Obligado!" (force opponents to meld matching cards)</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top: 14px;" data-i18n="btnCreate">Create Table & Play!</button>
+        </form>
+
+        <!-- Join Form -->
+        <form id="form-join" style="display: none;">
+          <div class="form-group">
+            <label for="join-name" data-i18n="labelName">Your Name or Nickname</label>
+            <input type="text" id="join-name" class="form-control" placeholder="e.g. Lupita" data-i18n-ph="placeholderGuest" maxlength="18" required>
+          </div>
+
+          <div class="form-group">
+            <label for="join-code" data-i18n="labelRoomCode">Room Code (5 letters)</label>
+            <input type="text" id="join-code" class="form-control" placeholder="e.g. MEX26" maxlength="5" style="text-transform: uppercase; font-weight: 800; letter-spacing: 3px;" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top: 14px;" data-i18n="btnJoin">Sit at Table!</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. LOBBY SCREEN -->
+    <section id="screen-lobby" class="screen">
+      <div class="lobby-header">
+        <h2 style="font-size: 1.5rem; font-weight: 800;" data-i18n="lobbyTitle">Cantina Table Lobby</h2>
+        <div class="room-badge">
+          <span data-i18n="codeLabel">Code:</span>
+          <span id="lobby-room-code" class="room-code-display">-----</span>
+          <button id="btn-copy-code" class="copy-btn" data-i18n="btnCopy">Copy</button>
+          <button id="btn-toggle-qr" class="copy-btn qr-badge-btn" title="Show QR Code">📱 QR</button>
+        </div>
+      </div>
+
+      <div id="lobby-qr-card" class="qr-card-panel" style="display: none;">
+        <div class="qr-card-content">
+          <div id="lobby-qrcode" class="qrcode-wrapper"></div>
+          <div class="qr-card-text">
+            <h4 data-i18n="qrTitle">📱 Scan to Join Table</h4>
+            <p data-i18n="qrSubtitle">Point your phone camera to sit at this table immediately</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lobby-grid">
+        <!-- Players Seat List -->
+        <div class="card-panel">
+          <div class="panel-header-row">
+            <h3 style="color: #fbbf24; font-size: 1.1rem;"><span data-i18n="playersInRoom">Seated Players</span> (<span id="lobby-player-count">0</span>/6)</h3>
+            <span id="lobby-scaling-badge" class="rule-badge">Auto</span>
+          </div>
+
+          <div id="lobby-players-list" class="players-list"></div>
+
+          <div id="lobby-bot-controls" class="lobby-bot-controls" style="display: none;">
+            <button id="btn-add-bot" class="btn-bot-action" type="button" data-i18n="btnAddBot">🤖 + Add Bot</button>
+            <button id="btn-remove-bot" class="btn-bot-action" type="button" data-i18n="btnRemoveBot">🤖 - Remove Bot</button>
+          </div>
+
+          <div id="lobby-host-controls" style="margin-top: 20px; display: none;">
+            <button id="btn-start-game" class="btn-primary" style="font-size: 1.15rem;" data-i18n="btnStartGame">🃏 DEAL CARDS!</button>
+          </div>
+          <div id="lobby-guest-msg" style="margin-top: 18px; text-align: center; color: #94a3b8; font-style: italic;" data-i18n="waitingHost">
+            Waiting for host to deal the cards...
+          </div>
+        </div>
+
+        <!-- Table Rules & Scaling Preview -->
+        <div class="card-panel">
+          <h3 style="color: #fbbf24; font-size: 1.1rem; margin-bottom: 12px;" data-i18n="tableRulesTitle">Table Rules & Deck Preview</h3>
+          <div id="lobby-rules-summary" class="rules-summary-box"></div>
+
+          <div id="lobby-host-settings" style="display: none; margin-top: 16px;">
+            <div class="form-group">
+              <label for="lobby-deck-mode" data-i18n="labelDeckMode">Deck & Hand Scaling</label>
+              <select id="lobby-deck-mode" class="form-control">
+                <option value="auto" data-i18n="deckAuto">✨ Auto-Scale (1 deck 2–3p, 2 decks 4–6p)</option>
+                <option value="single" data-i18n="deckSingle">🃏 Single 40-Card Deck (2p:10, 3p:8, 4p:7 cards)</option>
+                <option value="double" data-i18n="deckDouble">🎴 Double 80-Card Deck (Always 10 cards, meld 11)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="lobby-chips" data-i18n="labelChips">Betting Chips / El Pozo</label>
+              <select id="lobby-chips" class="form-control">
+                <option value="0" data-i18n="chipsOff">🚫 Free Play</option>
+                <option value="5" data-i18n="chips5">💰 5 Fichas Buy-in</option>
+                <option value="10" data-i18n="chips10">💰 10 Fichas Buy-in</option>
+                <option value="20" data-i18n="chips20">💰 20 Fichas Buy-in</option>
+              </select>
+            </div>
+            <label class="checkbox-label" style="margin-top: 8px;">
+              <input type="checkbox" id="lobby-obligado">
+              <span data-i18n="labelObligado">⚡ Enable "¡Obligado!"</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. LIVE GAME TABLE SCREEN -->
+    <section id="screen-game" class="screen">
+
+      <!-- Top Game Status Strip -->
+      <div class="game-top-bar">
+        <div class="top-bar-left">
+          <span class="room-pill"><span data-i18n="roomTag">ROOM</span>: <strong id="game-room-code-tag">-----</strong></span>
+          <span class="rule-badge" id="game-round-badge">Ronda #1</span>
+          <span class="target-pill" id="game-target-badge">Meta: 11</span>
+        </div>
+        <div class="top-bar-right">
+          <span id="game-rollover-tag" class="rollover-pill" style="display: none;">🔥 POZO ACUMULADO</span>
+          <span id="game-pot-badge" class="pot-badge" style="display: none;">💰 <span data-i18n="potLabel">Pozo</span>: <strong id="game-pot-val">0</strong></span>
+        </div>
+      </div>
+
+      <!-- Live Action Notice Banner -->
+      <div id="game-notice-banner" class="game-notice-banner">
+        🃏 Esperando jugada...
+      </div>
+
+      <!-- Opponents Ring (2-6 players) -->
+      <div id="opponents-ring" class="opponents-ring">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Center Cantina Felt Area -->
+      <div class="center-felt-table">
+        <!-- Stock Pile ("El Mazo") -->
+        <div class="table-pile-box">
+          <div class="pile-label" data-i18n="stockLabel">El Mazo</div>
+          <button id="stock-pile-card" class="card-back-pile" type="button" title="Flip Card from Stock">
+            <div class="card-back-pattern">
+              <span class="pile-icon">🌞</span>
+              <span id="stock-count-val" class="pile-count">20</span>
+            </div>
+          </button>
+          <div id="stock-turn-hint" class="pile-sub">---</div>
+        </div>
+
+        <!-- Offered Card & Priority Ring -->
+        <div class="center-offer-box">
+          <div id="offered-source-label" class="pile-label" data-i18n="offeredLabel">Carta en Mesa</div>
+          <div id="offered-card-slot" class="offered-card-slot empty">
+            <span class="empty-offer-text" data-i18n="noOfferedCard">Voltea del mazo</span>
+          </div>
+          <div id="claim-ring-strip" class="claim-ring-strip"></div>
+        </div>
+
+        <!-- Waste / Burn Pile ("La Basura") -->
+        <div class="table-pile-box">
+          <div class="pile-label" data-i18n="wasteLabel">La Basura</div>
+          <div id="waste-pile-card" class="card-back-pile waste-pile">
+            <div class="card-back-pattern waste-pattern">
+              <span class="pile-icon">🔥</span>
+              <span id="waste-count-val" class="pile-count">0</span>
+            </div>
+          </div>
+          <div class="pile-sub" data-i18n="burnedSub">Quemadas</div>
+        </div>
+      </div>
+
+      <!-- Contextual Action Bar -->
+      <div id="action-bar" class="action-bar">
+        <div id="action-prompt" class="action-prompt">Esperando turno...</div>
+        <div id="action-buttons" class="action-buttons"></div>
+      </div>
+
+      <!-- My Table Melds & My Hand -->
+      <div class="my-player-area">
+        <div class="my-melds-panel">
+          <div class="section-header-row">
+            <h3>
+              <span data-i18n="myMeldsTitle">Mis Juegos en Mesa</span>
+              <span class="progress-pill"><span id="my-melds-count">0</span> / <span id="my-target-count">11</span></span>
+            </h3>
+            <button id="btn-open-rearrange" class="btn-secondary btn-compact" type="button" style="display: none;" data-i18n="btnRearrange">
+              🔀 Acomodar / Rearrange
+            </button>
+          </div>
+          <div id="my-melds-list" class="melds-row">
+            <div class="empty-melds-msg" data-i18n="noMeldsYet">Aún no bajas juegos. ¡Forma tercias o corridas de 3+!</div>
+          </div>
+        </div>
+
+        <div class="my-hand-panel">
+          <div class="section-header-row">
+            <h3>
+              <span data-i18n="myHandTitle">Mi Mano</span>
+              <span class="count-pill" id="my-hand-count">0</span>
+            </h3>
+            <div class="hand-toolbar">
+              <button id="btn-sort-suit" class="btn-secondary btn-compact" type="button" data-i18n="btnSortSuit">🎨 Palo</button>
+              <button id="btn-sort-rank" class="btn-secondary btn-compact" type="button" data-i18n="btnSortRank">🔢 Número</button>
+              <button id="btn-clear-selection" class="btn-secondary btn-compact" type="button" style="display: none;" data-i18n="btnClearSel">✖ Limpiar</button>
+            </div>
+          </div>
+          <div id="my-hand-cards" class="hand-cards-tray"></div>
+        </div>
+
+        <!-- Reactions & Cotorreo -->
+        <div class="reactions-bar">
+          <button class="reaction-btn" data-emoji="🃏">🃏</button>
+          <button class="reaction-btn" data-emoji="⚡">⚡</button>
+          <button class="reaction-btn" data-emoji="🔥">🔥</button>
+          <button class="reaction-btn" data-emoji="😱">😱</button>
+          <button class="reaction-btn" data-emoji="🎺">🎺</button>
+          <button class="reaction-btn" data-emoji="🇲🇽">🇲🇽</button>
+          <button class="reaction-btn" data-emoji="👏">👏</button>
+        </div>
+
+        <div class="cotorreo-bar">
+          <button class="cotorreo-btn" data-shout="¡Ya casi hago Conquián! 🔥">¡Ya casi! 🔥</button>
+          <button class="cotorreo-btn" data-shout="¡Cuidado con el ¡Obligado!! ⚡">¡Ojo con el ¡Obligado!! ⚡</button>
+          <button class="cotorreo-btn" data-shout="¡Esa carta me servía! 😱">¡Esa me servía! 😱</button>
+          <button class="cotorreo-btn" data-shout="¡Barájale bien! 🃏">¡Barájale bien! 🃏</button>
+          <button class="cotorreo-btn" data-shout="¡Se huele a Tablas! 🤝">¡Huele a Tablas! 🤝</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- REARRANGE / ADVANCED MELD MODAL -->
+  <div id="rearrange-modal" class="modal-overlay">
+    <div class="modal-content rearrange-modal-content">
+      <h3 style="color: #fbbf24; font-size: 1.3rem;" data-i18n="rearrangeTitle">🔀 Acomodar Juegos / Meld Builder</h3>
+      <p id="rearrange-subtitle" style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;"></p>
+
+      <div class="rearrange-section-label" data-i18n="rearrangeGroupsLabel">Juegos Propuestos (Toca un grupo activo para agregar/quitar cartas):</div>
+      <div id="rearrange-groups-list" class="rearrange-groups-list"></div>
+
+      <div style="display: flex; gap: 8px; justify-content: center; margin: 10px 0;">
+        <button id="btn-add-group" class="btn-secondary btn-compact" type="button" data-i18n="btnNewGroup">➕ Nuevo Juego / New Group</button>
+      </div>
+
+      <div class="rearrange-section-label" data-i18n="rearrangePoolLabel">Cartas Disponibles (Tu mano + juegos actuales + carta ofrecida):</div>
+      <div id="rearrange-pool-cards" class="rearrange-pool-cards"></div>
+
+      <div id="rearrange-validation-msg" class="rearrange-validation-msg"></div>
+
+      <div class="modal-actions-row">
+        <button id="btn-confirm-rearrange" class="btn-primary" type="button" data-i18n="btnConfirmRearrange">✅ Confirmar Juegos</button>
+        <button id="btn-cancel-rearrange" class="btn-secondary" type="button" data-i18n="btnCancel">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WINNER / TABLAS MODAL -->
+  <div id="winner-modal" class="modal-overlay">
+    <div class="modal-content winner-modal-content">
+      <div id="winner-icons" class="winner-celebration-icons">🏆🎺🎊</div>
+      <h2 id="winner-title" class="winner-title">¡¡CONQUIÁN!!</h2>
+      <p id="winner-message" class="winner-message">---</p>
+
+      <div id="winner-pot-banner" class="winner-pot-banner" style="display: none;">
+        <span>💰 <span id="winner-pot-label">Pot Won:</span> <strong id="winner-pot-amount" style="color: #fde047;">0</strong> <span data-i18n="chipsLabel">fichas</span></span>
+      </div>
+
+      <div id="winner-melds-preview" class="winner-melds-preview"></div>
+
+      <div id="winner-scoreboard" class="winner-scoreboard"></div>
+
+      <div id="winner-host-actions" class="winner-actions-grid" style="display: none; margin-top: 12px;">
+        <button id="btn-restart-round" class="btn-primary" data-i18n="btnPlayAgain">🃏 Next Round!</button>
+        <button id="btn-winner-exit-host" class="btn-secondary" data-i18n="btnExitRoom">🚪 Leave Table</button>
+      </div>
+      <div id="winner-guest-msg" class="winner-guest-msg" data-i18n="waitingNextRound">
+        Waiting for host to deal the next hand...
+      </div>
+      <div id="winner-guest-actions" style="margin-top: 10px; display: none;">
+        <button id="btn-winner-exit-guest" class="btn-secondary" style="width: 100%;" data-i18n="btnExitRoom">🚪 Leave Table</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RULES MODAL -->
+  <div id="rules-modal" class="modal-overlay">
+    <div class="modal-content rules-modal-content">
+      <h3 style="color: #fbbf24; font-size: 1.35rem; margin-bottom: 10px;" data-i18n="rulesHeader">📖 Reglas de Conquián Multijugador</h3>
+      <div id="rules-body" class="rules-body"></div>
+      <button id="btn-close-rules" class="btn-primary" style="margin-top: 16px;" data-i18n="btnGotIt">¡Entendido! / Got It!</button>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="qrcode.min.js"></script>
+  <script src="audio.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

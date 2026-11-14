@@ -1,0 +1,20 @@
+{
+  "name": "¡Conquián Mexicano Online!",
+  "short_name": "Conquián",
+  "description": "Juego multijugador en tiempo real del clásico Conquián Mexicano para 2 a 6 jugadores con Baraja Española, bots de cantina, regla ¡Obligado! y Pozo acumulado.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#111c14",
+  "theme_color": "#f59e0b",
+  "lang": "es",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512 192x192 128x128 64x64",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
