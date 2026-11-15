@@ -97,9 +97,10 @@
           <div class="form-group">
             <label for="create-deck-mode" data-i18n="labelDeckMode">Deck & Hand Scaling (2–6 Players)</label>
             <select id="create-deck-mode" class="form-control">
-              <option value="auto" selected data-i18n="deckAuto">✨ Auto-Scale (1 deck 2–3p, 2 decks 4–6p)</option>
-              <option value="single" data-i18n="deckSingle">🃏 Single 40-Card Deck (2p:10, 3p:8, 4p:7 cards)</option>
-              <option value="double" data-i18n="deckDouble">🎴 Double 80-Card Deck (Always 10 cards, meld 11)</option>
+              <option value="auto" selected data-i18n="deckAuto">✨ Classic 9-Card — Auto (8 cards, meld 9; 2 decks for 4–6p)</option>
+              <option value="single" data-i18n="deckSingle">🃏 Single 40-Card Deck (2–3p: 8→9, 4p: 7→8 cards)</option>
+              <option value="double" data-i18n="deckDouble">🎴 Double 80-Card Deck (Always 8 cards, meld 9)</option>
+              <option value="ten" data-i18n="deckTen">🔟 Extended 10-Card Conquián (Meld 11 to win)</option>
             </select>
           </div>
 
@@ -204,9 +205,10 @@
             <div class="form-group">
               <label for="lobby-deck-mode" data-i18n="labelDeckMode">Deck & Hand Scaling</label>
               <select id="lobby-deck-mode" class="form-control">
-                <option value="auto" data-i18n="deckAuto">✨ Auto-Scale (1 deck 2–3p, 2 decks 4–6p)</option>
-                <option value="single" data-i18n="deckSingle">🃏 Single 40-Card Deck (2p:10, 3p:8, 4p:7 cards)</option>
-                <option value="double" data-i18n="deckDouble">🎴 Double 80-Card Deck (Always 10 cards, meld 11)</option>
+                <option value="auto" data-i18n="deckAuto">✨ Classic 9-Card — Auto (8 cards, meld 9; 2 decks for 4–6p)</option>
+                <option value="single" data-i18n="deckSingle">🃏 Single 40-Card Deck (2–3p: 8→9, 4p: 7→8 cards)</option>
+                <option value="double" data-i18n="deckDouble">🎴 Double 80-Card Deck (Always 8 cards, meld 9)</option>
+                <option value="ten" data-i18n="deckTen">🔟 Extended 10-Card Conquián (Meld 11 to win)</option>
               </select>
             </div>
             <div class="form-group">
@@ -235,7 +237,7 @@
         <div class="top-bar-left">
           <span class="room-pill"><span data-i18n="roomTag">ROOM</span>: <strong id="game-room-code-tag">-----</strong></span>
           <span class="rule-badge" id="game-round-badge">Ronda #1</span>
-          <span class="target-pill" id="game-target-badge">Meta: 11</span>
+          <span class="target-pill" id="game-target-badge">Meta: 9</span>
         </div>
         <div class="top-bar-right">
           <span id="game-rollover-tag" class="rollover-pill" style="display: none;">🔥 POZO ACUMULADO</span>
@@ -301,7 +303,7 @@
           <div class="section-header-row">
             <h3>
               <span data-i18n="myMeldsTitle">Mis Juegos en Mesa</span>
-              <span class="progress-pill"><span id="my-melds-count">0</span> / <span id="my-target-count">11</span></span>
+              <span class="progress-pill"><span id="my-melds-count">0</span> / <span id="my-target-count">9</span></span>
             </h3>
             <button id="btn-open-rearrange" class="btn-secondary btn-compact" type="button" style="display: none;" data-i18n="btnRearrange">
               🔀 Acomodar / Rearrange

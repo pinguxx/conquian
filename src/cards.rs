@@ -304,15 +304,15 @@ pub fn validate_meld_submission(
 }
 
 /// Validates laying down or rearranging melds purely from a player's own hand + existing table melds
-/// (used during MustDiscard when the player wants to lay additional melds before discarding).
+/// (players can lay pure-hand melds or mix/rearrange table melds during their active turn).
 pub fn validate_hand_rearrange(
     hand: &[Card],
     existing_melds: &[Meld],
     used_hand_ids: &[u8],
     proposed_melds: &[Vec<u8>],
 ) -> Result<(Vec<Meld>, Vec<Card>), String> {
-    if used_hand_ids.is_empty() && proposed_melds.len() == existing_melds.len() {
-        return Err("No new cards selected to meld".to_string());
+    if proposed_melds.is_empty() {
+        return Err("No melds proposed".to_string());
     }
 
     let mut used_set: HashSet<u8> = HashSet::new();

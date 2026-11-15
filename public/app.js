@@ -19,9 +19,10 @@
       placeholderHost: 'e.g. Don Pancho',
       placeholderGuest: 'e.g. Lupita',
       labelDeckMode: 'Deck & Hand Scaling (2–6 Players)',
-      deckAuto: '✨ Auto-Scale (1 deck 2–3p, 2 decks 4–6p)',
-      deckSingle: '🃏 Single 40-Card Deck (2p:10, 3p:8, 4p:7 cards)',
-      deckDouble: '🎴 Double 80-Card Deck (Always 10 cards, meld 11)',
+      deckAuto: '✨ Classic 9-Card — Auto (8 cards, meld 9; 2 decks for 4–6p)',
+      deckSingle: '🃏 Single 40-Card Deck (2–3p: 8→9, 4p: 7→8 cards)',
+      deckDouble: '🎴 Double 80-Card Deck (Always 8 cards, meld 9)',
+      deckTen: '🔟 Extended 10-Card Conquián (Meld 11 to win)',
       labelChips: 'Betting Chips / El Pozo',
       chipsOff: '🚫 Free Play (No Chips)',
       chips5: '💰 5 Fichas Buy-in',
@@ -53,7 +54,7 @@
       wasteLabel: 'La Basura',
       burnedSub: 'Burned',
       myMeldsTitle: 'My Table Melds',
-      btnRearrange: '🔀 Rearrange / Custom Meld',
+      btnRearrange: '🔀 Mix / Rearrange Melds',
       noMeldsYet: 'No melds on the table yet. Build sets or runs of 3+!',
       myHandTitle: 'My Hand',
       btnSortSuit: '🎨 Suit',
@@ -71,11 +72,11 @@
       rulesHeader: '📖 Conquián Multiplayer Rules',
       btnGotIt: 'Got It!',
       chipsLabel: 'chips',
-      yourTurnFlip: '🎴 Your turn! Flip the top card from El Mazo.',
+      yourTurnFlip: '🎴 Your turn! Flip from El Mazo, or lay/mix hand melds first.',
       waitFlip: '⏳ Waiting for {name} to flip from El Mazo...',
-      yourPriority: '⭐ Your decision on {card}! Meld it, force ¡Obligado!, or Pass.',
+      yourPriority: '⭐ Your decision on {card}! Claim it, mix your melds, ¡Obligado!, or Pass.',
       waitPriority: '⏳ {name} is deciding on {card}...',
-      yourDiscard: '🗑️ Select 1 card from your hand to discard (or lay another meld).',
+      yourDiscard: '🗑️ Select 1 card from your hand to discard (or lay/mix melds first).',
       waitDiscard: '⏳ {name} must discard 1 card...',
       btnFlipStock: '🎴 Flip Stock Card',
       btnMeldSelected: '✨ Meld Selected ({n})',
@@ -83,7 +84,7 @@
       btnObligadoTo: '⚡ ¡Obligado! → {name}',
       btnPass: '⏭️ Pass',
       btnDiscardSel: '🗑️ Discard Selected',
-      btnLayExtra: '🧩 Lay Extra Meld ({n})',
+      btnLayExtra: '🧩 Play / Mix from Hand ({n})',
       fromStock: 'From El Mazo',
       fromDiscard: 'Discarded by {name}',
       tablasTitle: '🤝 ¡TABLAS! (TIE HAND)',
@@ -105,9 +106,10 @@
       placeholderHost: 'ej. Don Pancho',
       placeholderGuest: 'ej. Lupita',
       labelDeckMode: 'Barajas y Cartas por Jugador (2–6)',
-      deckAuto: '✨ Automático (1 baraja 2–3j, 2 barajas 4–6j)',
-      deckSingle: '🃏 1 Baraja de 40 Cartas (2j:10, 3j:8, 4j:7)',
-      deckDouble: '🎴 2 Barajas de 80 Cartas (Siempre 10 cartas, meta 11)',
+      deckAuto: '✨ Clásico 9 Cartas — Automático (8 cartas, meta 9; 2 barajas en 4–6j)',
+      deckSingle: '🃏 1 Baraja de 40 Cartas (2–3j: 8→9, 4j: 7→8)',
+      deckDouble: '🎴 2 Barajas de 80 Cartas (Siempre 8 cartas, meta 9)',
+      deckTen: '🔟 Conquián Largo de 10 Cartas (Meta 11 cartas)',
       labelChips: 'Fichas de Apuesta / El Pozo',
       chipsOff: '🚫 Sin Apuestas (Juego Libre)',
       chips5: '💰 Entrada de 5 Fichas',
@@ -139,7 +141,7 @@
       wasteLabel: 'La Basura',
       burnedSub: 'Quemadas',
       myMeldsTitle: 'Mis Juegos en Mesa',
-      btnRearrange: '🔀 Acomodar Juegos',
+      btnRearrange: '🔀 Mezclar / Acomodar',
       noMeldsYet: 'Aún no bajas juegos. ¡Forma tercias o corridas de 3+!',
       myHandTitle: 'Mi Mano',
       btnSortSuit: '🎨 Palo',
@@ -157,11 +159,11 @@
       rulesHeader: '📖 Reglas de Conquián Multijugador',
       btnGotIt: '¡Entendido!',
       chipsLabel: 'fichas',
-      yourTurnFlip: '🎴 ¡Tu turno! Voltea la carta de arriba de El Mazo.',
+      yourTurnFlip: '🎴 ¡Tu turno! Voltea de El Mazo, o baja/mezcla juegos de tu mano.',
       waitFlip: '⏳ Esperando a que {name} voltee de El Mazo...',
-      yourPriority: '⭐ ¡Te toca decidir por {card}! Bájala, aplica ¡Obligado! o Pasa.',
+      yourPriority: '⭐ ¡Te toca decidir por {card}! Bájala, mezcla tus juegos, ¡Obligado! o Pasa.',
       waitPriority: '⏳ {name} está decidiendo sobre {card}...',
-      yourDiscard: '🗑️ Selecciona 1 carta de tu mano para descartar (o baja otro juego).',
+      yourDiscard: '🗑️ Selecciona 1 carta para descartar (o baja/mezcla juegos antes).',
       waitDiscard: '⏳ {name} debe descartar 1 carta...',
       btnFlipStock: '🎴 Voltear de El Mazo',
       btnMeldSelected: '✨ Bajar Juego ({n})',
@@ -169,7 +171,7 @@
       btnObligadoTo: '⚡ ¡Obligado! → {name}',
       btnPass: '⏭️ Pasar',
       btnDiscardSel: '🗑️ Descartar Seleccionada',
-      btnLayExtra: '🧩 Bajar Otro Juego ({n})',
+      btnLayExtra: '🧩 Bajar / Mezclar de Mano ({n})',
       fromStock: 'De El Mazo',
       fromDiscard: 'Descarte de {name}',
       tablasTitle: '🤝 ¡JUEGO TABLAS!',
@@ -344,10 +346,155 @@
     return false;
   }
 
-  function computeSynergyCardIds(hand, offeredCard) {
+  function canKeepCardOrWin(hand, myMelds, usedHandCards) {
+    const remaining = hand.length - usedHandCards.length;
+    if (remaining >= 1) return true;
+    const currentMelded = (myMelds || []).reduce((acc, m) => acc + m.cards.length, 0);
+    return currentMelded + usedHandCards.length >= (gameState ? gameState.targetMeldCount : 9);
+  }
+
+  // Exact backtracking partition solver for laying hand melds and mixing table melds
+  function solveMeldPartition(existingMelds, extraCards) {
+    if (!extraCards || extraCards.length === 0) return null;
+    const melds = existingMelds || [];
+
+    // Fast path A: direct new meld using only extraCards
+    if (extraCards.length >= 3 && isValidMeld(extraCards)) {
+      const groups = melds.map(m => m.cards.map(c => c.id));
+      groups.push(extraCards.map(c => c.id));
+      return groups;
+    }
+
+    // Fast path B: extend one existing meld directly with all extraCards
+    for (let idx = 0; idx < melds.length; idx++) {
+      const merged = [...melds[idx].cards, ...extraCards];
+      if (isValidMeld(merged)) {
+        return melds.map((m, i) => (i === idx ? merged : m.cards).map(c => c.id));
+      }
+    }
+
+    // Full partition search over existing table cards + extraCards (at most ~12 cards)
+    const byId = new Map();
+    melds.forEach(m => m.cards.forEach(c => byId.set(c.id, c)));
+    extraCards.forEach(c => byId.set(c.id, c));
+    const allCards = Array.from(byId.values());
+    const n = allCards.length;
+    if (n < 3 || n > 28) return null;
+
+    const fullMask = (1 << n) - 1;
+    const failedMasks = new Set();
+
+    function search(usedMask, groups) {
+      if (usedMask === fullMask) return groups;
+      if (failedMasks.has(usedMask)) return null;
+
+      let firstIdx = 0;
+      while (usedMask & (1 << firstIdx)) firstIdx++;
+      const c0 = allCards[firstIdx];
+      const o0 = RANK_ORDER_MAP[c0.rank];
+
+      // 1) Candidate Runs containing c0 (same suit, consecutive rank orders)
+      const orderBuckets = Array.from({ length: 10 }, () => []);
+      for (let i = 0; i < n; i++) {
+        if (i === firstIdx) {
+          orderBuckets[o0] = [firstIdx];
+        } else if (!(usedMask & (1 << i)) && allCards[i].suit === c0.suit) {
+          orderBuckets[RANK_ORDER_MAP[allCards[i].rank]].push(i);
+        }
+      }
+      let minOrd = o0;
+      while (minOrd > 0 && orderBuckets[minOrd - 1].length > 0) minOrd--;
+      let maxOrd = o0;
+      while (maxOrd < 9 && orderBuckets[maxOrd + 1].length > 0) maxOrd++;
+
+      const runCandidates = [];
+      for (let startOrd = minOrd; startOrd <= o0; startOrd++) {
+        for (let endOrd = o0; endOrd <= maxOrd; endOrd++) {
+          if (endOrd - startOrd + 1 < 3) continue;
+          const buildRun = (ord, acc) => {
+            if (ord > endOrd) {
+              runCandidates.push([...acc]);
+              return;
+            }
+            for (const idx of orderBuckets[ord]) {
+              acc.push(idx);
+              buildRun(ord + 1, acc);
+              acc.pop();
+            }
+          };
+          buildRun(startOrd, []);
+        }
+      }
+
+      for (const idxs of runCandidates) {
+        let nextMask = usedMask;
+        const ids = [];
+        for (const idx of idxs) {
+          nextMask |= (1 << idx);
+          ids.push(allCards[idx].id);
+        }
+        groups.push(ids);
+        const solved = search(nextMask, groups);
+        if (solved) return solved;
+        groups.pop();
+      }
+
+      // 2) Candidate Sets containing c0 (same rank, distinct suits)
+      const bySuit = new Map();
+      for (let i = 0; i < n; i++) {
+        if (i !== firstIdx && !(usedMask & (1 << i))) {
+          const ci = allCards[i];
+          if (ci.rank === c0.rank && ci.suit !== c0.suit) {
+            if (!bySuit.has(ci.suit)) bySuit.set(ci.suit, []);
+            bySuit.get(ci.suit).push(i);
+          }
+        }
+      }
+      const otherSuits = Array.from(bySuit.keys());
+      const setCandidates = [];
+      const buildSet = (suitIdx, picked) => {
+        if (picked.length >= 3) {
+          setCandidates.push([...picked]);
+        }
+        if (picked.length === 4 || suitIdx >= otherSuits.length) return;
+        // Option 1: include one card from otherSuits[suitIdx]
+        for (const idx of bySuit.get(otherSuits[suitIdx])) {
+          picked.push(idx);
+          buildSet(suitIdx + 1, picked);
+          picked.pop();
+        }
+        // Option 2: skip otherSuits[suitIdx]
+        buildSet(suitIdx + 1, picked);
+      };
+      buildSet(0, [firstIdx]);
+
+      for (const idxs of setCandidates) {
+        let nextMask = usedMask;
+        const ids = [];
+        for (const idx of idxs) {
+          nextMask |= (1 << idx);
+          ids.push(allCards[idx].id);
+        }
+        groups.push(ids);
+        const solved = search(nextMask, groups);
+        if (solved) return solved;
+        groups.pop();
+      }
+
+      failedMasks.add(usedMask);
+      return null;
+    }
+
+    return search(0, []);
+  }
+
+  function computeSynergyCardIds(hand, offeredCard, myMelds) {
     const synergetic = new Set();
     if (!offeredCard || !hand) return synergetic;
     for (let i = 0; i < hand.length; i++) {
+      if (myMelds && myMelds.length > 0 && solveMeldPartition(myMelds, [offeredCard, hand[i]])) {
+        synergetic.add(hand[i].id);
+      }
       for (let j = i + 1; j < hand.length; j++) {
         if (isValidMeld([offeredCard, hand[i], hand[j]])) {
           synergetic.add(hand[i].id);
@@ -359,16 +506,15 @@
   }
 
   function resolveScalingClient(count, mode) {
-    if (count >= 5) return { isDouble: true, handSize: 10, target: 11 };
-    if (mode === 'double') return { isDouble: true, handSize: 10, target: 11 };
+    if (mode === 'ten') return { isDouble: count >= 4, handSize: 10, target: 11 };
+    if (mode === 'double') return { isDouble: true, handSize: 8, target: 9 };
     if (mode === 'single') {
-      if (count <= 2) return { isDouble: false, handSize: 10, target: 11 };
-      if (count === 3) return { isDouble: false, handSize: 8, target: 9 };
-      return { isDouble: false, handSize: 7, target: 8 };
+      if (count <= 3) return { isDouble: false, handSize: 8, target: 9 };
+      if (count === 4) return { isDouble: false, handSize: 7, target: 8 };
+      return { isDouble: true, handSize: 8, target: 9 };
     }
-    if (count <= 2) return { isDouble: false, handSize: 10, target: 11 };
-    if (count === 3) return { isDouble: false, handSize: 8, target: 9 };
-    return { isDouble: true, handSize: 10, target: 11 };
+    if (count <= 3) return { isDouble: false, handSize: 8, target: 9 };
+    return { isDouble: true, handSize: 8, target: 9 };
   }
 
   // WebSocket Management
@@ -665,8 +811,8 @@
     renderOpponentsRing(players);
     renderCenterTable(players);
     renderActionBar(players, hand, myMelds);
-    renderMyMelds(myMelds, myPlayer ? myPlayer.meldedCount : 0);
-    renderMyHand(hand);
+    renderMyMelds(myMelds, myPlayer ? myPlayer.meldedCount : 0, hand);
+    renderMyHand(hand, myMelds);
   }
 
   function renderOpponentsRing(players) {
@@ -821,6 +967,32 @@
     const activePlayer = players.find(p => p.id === gameState.activeActorId);
     const activeName = activePlayer ? activePlayer.name : '...';
     const selectedCards = hand.filter(c => selectedHandIds.has(c.id));
+    const handOnlyPartition = selectedCards.length >= 1 ? solveMeldPartition(myMelds, selectedCards) : null;
+    const canHandMeld = handOnlyPartition !== null && canKeepCardOrWin(hand, myMelds, selectedCards);
+
+    const appendHandMeldAndMixButtons = () => {
+      if (canHandMeld) {
+        const extraBtn = document.createElement('button');
+        extraBtn.className = 'btn-action-emerald';
+        extraBtn.textContent = t('btnLayExtra', { n: selectedCards.length });
+        extraBtn.addEventListener('click', () => {
+          sendWS('rearrange_melds', {
+            roomCode,
+            usedHandIds: selectedCards.map(c => c.id),
+            proposedMelds: handOnlyPartition
+          });
+          selectedHandIds.clear();
+        });
+        btnsEl.appendChild(extraBtn);
+      }
+      if (myMelds.length > 0 || hand.length >= 3) {
+        const mixBtn = document.createElement('button');
+        mixBtn.className = 'btn-secondary btn-compact';
+        mixBtn.textContent = t('btnRearrange');
+        mixBtn.addEventListener('click', openRearrangeModal);
+        btnsEl.appendChild(mixBtn);
+      }
+    };
 
     if (gameState.phase === 'awaiting_flip') {
       if (gameState.activeActorId === playerId) {
@@ -830,6 +1002,7 @@
         btn.textContent = t('btnFlipStock');
         btn.addEventListener('click', () => sendWS('flip_stock', { roomCode }));
         btnsEl.appendChild(btn);
+        appendHandMeldAndMixButtons();
       } else {
         promptEl.textContent = t('waitFlip', { name: activeName });
       }
@@ -841,26 +1014,27 @@
       if (gameState.claimTurnPlayerId === playerId) {
         promptEl.textContent = t('yourPriority', { card: cardStr });
 
-        // 1. Meld with selected hand cards + offeredCard
+        // 1. Meld offeredCard + selected hand card(s) (supporting mixing with existing table melds!)
+        const offerPartition =
+          gameState.offeredCard && selectedCards.length >= 1
+            ? solveMeldPartition(myMelds, [gameState.offeredCard, ...selectedCards])
+            : null;
         const meldBtn = document.createElement('button');
         meldBtn.className = 'btn-action-emerald';
         meldBtn.textContent = t('btnMeldSelected', { n: selectedCards.length });
-        const candidateCards = gameState.offeredCard ? [gameState.offeredCard, ...selectedCards] : [];
-        const canDirectMeld = selectedCards.length >= 2 && isValidMeld(candidateCards);
-        meldBtn.disabled = !canDirectMeld;
+        meldBtn.disabled = !offerPartition;
         meldBtn.addEventListener('click', () => {
-          const proposedMelds = myMelds.map(m => m.cards.map(c => c.id));
-          proposedMelds.push(candidateCards.map(c => c.id));
+          if (!offerPartition) return;
           sendWS('meld_card', {
             roomCode,
             usedHandIds: selectedCards.map(c => c.id),
-            proposedMelds
+            proposedMelds: offerPartition
           });
           selectedHandIds.clear();
         });
         btnsEl.appendChild(meldBtn);
 
-        // 2. 1-Click extend own melds
+        // 2. 1-Click extend own melds with offeredCard
         (gameState.canExtendMyMelds || []).forEach((meldId) => {
           const extBtn = document.createElement('button');
           extBtn.className = 'btn-action-emerald';
@@ -872,7 +1046,10 @@
           btnsEl.appendChild(extBtn);
         });
 
-        // 3. ¡Obligado! buttons
+        // 3. Play / Mix selected hand cards directly (or open Mix Melds modal) without taking offeredCard
+        appendHandMeldAndMixButtons();
+
+        // 4. ¡Obligado! buttons
         (gameState.obligadoTargets || []).forEach((ot) => {
           const obBtn = document.createElement('button');
           obBtn.className = 'btn-action-obligado';
@@ -888,7 +1065,7 @@
           btnsEl.appendChild(obBtn);
         });
 
-        // 4. Pass button
+        // 5. Pass button
         const passBtn = document.createElement('button');
         passBtn.className = 'btn-action-pass';
         passBtn.textContent = t('btnPass');
@@ -921,38 +1098,19 @@
         });
         btnsEl.appendChild(discBtn);
 
-        // Allow laying down an extra pure-hand meld before discarding
-        if (selectedCards.length >= 3 && isValidMeld(selectedCards)) {
-          const extraBtn = document.createElement('button');
-          extraBtn.className = 'btn-action-emerald';
-          extraBtn.textContent = t('btnLayExtra', { n: selectedCards.length });
-          extraBtn.addEventListener('click', () => {
-            const proposedMelds = myMelds.map(m => m.cards.map(c => c.id));
-            proposedMelds.push(selectedCards.map(c => c.id));
-            sendWS('rearrange_melds', {
-              roomCode,
-              usedHandIds: selectedCards.map(c => c.id),
-              proposedMelds
-            });
-            selectedHandIds.clear();
-          });
-          btnsEl.appendChild(extraBtn);
-        }
+        appendHandMeldAndMixButtons();
       } else {
         promptEl.textContent = t('waitDiscard', { name: activeName });
       }
     }
   }
 
-  function renderMyMelds(melds, meldedCount) {
+  function renderMyMelds(melds, meldedCount, hand) {
     $('my-melds-count').textContent = meldedCount;
     $('my-target-count').textContent = gameState.targetMeldCount;
 
-    const canRearrange =
-      gameState.state === 'playing' &&
-      ((gameState.phase === 'claiming_offer' && gameState.claimTurnPlayerId === playerId) ||
-        (gameState.phase === 'must_discard' && gameState.mustDiscardPlayerId === playerId));
-    $('btn-open-rearrange').style.display = canRearrange ? 'inline-flex' : 'none';
+    const isMyTurn = gameState.state === 'playing' && gameState.activeActorId === playerId;
+    $('btn-open-rearrange').style.display = isMyTurn ? 'inline-flex' : 'none';
 
     const listEl = $('my-melds-list');
     listEl.innerHTML = '';
@@ -970,15 +1128,37 @@
         ? gameState.canExtendMyMelds || []
         : []
     );
+    const selectedCards = (hand || []).filter(c => selectedHandIds.has(c.id));
+    const canKeepOrWinSel =
+      selectedCards.length >= 1 && canKeepCardOrWin(hand || [], melds, selectedCards);
 
-    melds.forEach((meld) => {
+    melds.forEach((meld, meldIdx) => {
       const group = document.createElement('div');
-      const isExt = canExtendSet.has(meld.id);
-      group.className = `table-meld-group ${isExt ? 'extendable-own' : ''}`;
-      if (isExt) {
+      const isExtOffer = canExtendSet.has(meld.id);
+      const isExtHand =
+        !isExtOffer &&
+        isMyTurn &&
+        canKeepOrWinSel &&
+        isValidMeld([...meld.cards, ...selectedCards]);
+
+      group.className = `table-meld-group ${isExtOffer || isExtHand ? 'extendable-own' : ''}`;
+      if (isExtOffer) {
         group.title = lang === 'es' ? 'Click para agregar carta en mesa' : 'Click to add offered card';
         group.addEventListener('click', () => {
           sendWS('meld_card', { roomCode, extendMeldId: meld.id });
+          selectedHandIds.clear();
+        });
+      } else if (isExtHand) {
+        group.title = lang === 'es' ? 'Click para agregar cartas seleccionadas de tu mano' : 'Click to add selected hand card(s)';
+        group.addEventListener('click', () => {
+          const proposedMelds = melds.map((m, i) =>
+            (i === meldIdx ? [...m.cards, ...selectedCards] : m.cards).map(c => c.id)
+          );
+          sendWS('rearrange_melds', {
+            roomCode,
+            usedHandIds: selectedCards.map(c => c.id),
+            proposedMelds
+          });
           selectedHandIds.clear();
         });
       }
@@ -998,7 +1178,7 @@
     return copy;
   }
 
-  function renderMyHand(hand) {
+  function renderMyHand(hand, myMelds) {
     $('my-hand-count').textContent = hand.length;
     $('btn-clear-selection').style.display = selectedHandIds.size > 0 ? 'inline-flex' : 'none';
 
@@ -1010,7 +1190,7 @@
       gameState.claimTurnPlayerId === playerId &&
       gameState.offeredCard;
     const synergyIds = showSynergy
-      ? computeSynergyCardIds(hand, gameState.offeredCard)
+      ? computeSynergyCardIds(hand, gameState.offeredCard, myMelds)
       : new Set();
 
     hand.forEach((card) => {
@@ -1054,20 +1234,23 @@
 
     rearrangeGroups = myMelds.map(m => [...m.cards]);
     rearrangePool = [...hand];
-    if (gameState.phase === 'claiming_offer' && gameState.offeredCard) {
+    const hasClaimableOffer =
+      gameState.phase === 'claiming_offer' &&
+      gameState.claimTurnPlayerId === playerId &&
+      gameState.offeredCard;
+    if (hasClaimableOffer) {
       rearrangePool.push(gameState.offeredCard);
     }
     rearrangeGroups.push([]);
     rearrangeActiveGroupIdx = rearrangeGroups.length - 1;
 
-    $('rearrange-subtitle').textContent =
-      gameState.phase === 'claiming_offer'
-        ? (lang === 'es'
-            ? 'Puedes mover cartas de tus juegos de 4+, incluir la carta en mesa y cartas de tu mano.'
-            : 'Rearrange your table melds, include the offered card, and add cards from your hand.')
-        : (lang === 'es'
-            ? 'Acomoda tus juegos en mesa o baja juegos adicionales de tu mano antes de descartar.'
-            : 'Rearrange your table melds or lay extra melds from your hand before discarding.');
+    $('rearrange-subtitle').textContent = hasClaimableOffer
+      ? (lang === 'es'
+          ? 'Mezcla tus juegos de mesa con cartas de tu mano, y opcionalmente incluye la carta en mesa.'
+          : 'Mix your table melds with cards from your hand, and optionally include the offered card.')
+      : (lang === 'es'
+          ? 'Mezcla cartas entre tus juegos en mesa o baja tercias y corridas desde tu mano.'
+          : 'Mix cards across your table melds or lay sets and runs directly from your hand.');
 
     renderRearrangeModal();
     $('rearrange-modal').classList.add('open');
@@ -1081,10 +1264,14 @@
     poolEl.innerHTML = '';
 
     const me = (gameState.players || []).find(p => p.id === playerId);
+    const myMelds = me ? me.melds : [];
     const existingIds = new Set();
-    (me ? me.melds : []).forEach(m => m.cards.forEach(c => existingIds.add(c.id)));
+    myMelds.forEach(m => m.cards.forEach(c => existingIds.add(c.id)));
+    const handIdsSet = new Set((gameState.myHand || []).map(c => c.id));
     const offeredId =
-      gameState.phase === 'claiming_offer' && gameState.offeredCard
+      gameState.phase === 'claiming_offer' &&
+      gameState.claimTurnPlayerId === playerId &&
+      gameState.offeredCard
         ? gameState.offeredCard.id
         : null;
 
@@ -1139,16 +1326,33 @@
     nonEmptyGroups.forEach(g => g.forEach(c => assignedIds.add(c.id)));
 
     const missingExisting = Array.from(existingIds).some(id => !assignedIds.has(id));
-    const missingOffered = offeredId !== null && !assignedIds.has(offeredId);
     const allGroupsValid = nonEmptyGroups.length > 0 && nonEmptyGroups.every(g => isValidMeld(g));
+    const offeredIncluded = offeredId !== null && assignedIds.has(offeredId);
+
+    const canonicalSig = (groups) =>
+      groups.map(g => g.map(c => c.id).sort((a, b) => a - b).join(',')).sort().join('|');
+    const unchanged =
+      !offeredIncluded &&
+      canonicalSig(myMelds.map(m => m.cards)) === canonicalSig(nonEmptyGroups);
+
+    let usedHandCount = 0;
+    assignedIds.forEach(id => {
+      if (handIdsSet.has(id)) usedHandCount++;
+    });
+    const wouldEmptyBeforeWin =
+      handIdsSet.size - usedHandCount === 0 && assignedIds.size < gameState.targetMeldCount;
 
     let errorText = '';
     if (missingExisting) {
       errorText = lang === 'es' ? '⚠️ Todas las cartas ya bajadas en mesa deben permanecer en juegos válidos.' : '⚠️ All existing table meld cards must remain in valid melds.';
-    } else if (missingOffered) {
-      errorText = lang === 'es' ? '⚠️ Debes incluir la carta ofrecida en la mesa.' : '⚠️ You must include the offered card in a meld.';
     } else if (!allGroupsValid) {
       errorText = lang === 'es' ? '⚠️ Cada grupo debe ser una tercia/cuarteta o corrida válida de 3+.' : '⚠️ Every group must be a valid set or run of 3+ cards.';
+    } else if (unchanged) {
+      errorText = lang === 'es' ? '⚠️ Mueve cartas de tus juegos, agrega cartas de tu mano o incluye la carta en mesa.' : '⚠️ Move cards between your melds, add from hand, or include the offered card.';
+    } else if (wouldEmptyBeforeWin) {
+      errorText = lang === 'es'
+        ? `⚠️ Conserva al menos 1 carta en mano hasta llegar a ${gameState.targetMeldCount}.`
+        : `⚠️ Keep at least 1 card in hand until reaching ${gameState.targetMeldCount}.`;
     }
 
     if (errorText) {
@@ -1157,7 +1361,9 @@
       $('btn-confirm-rearrange').disabled = true;
     } else {
       msgEl.style.color = '#86efac';
-      msgEl.textContent = lang === 'es' ? '✅ ¡Combinación válida!' : '✅ Valid meld arrangement!';
+      msgEl.textContent = offeredIncluded
+        ? (lang === 'es' ? '✅ ¡Combinación válida (toma la carta en mesa)!' : '✅ Valid arrangement (claims offered card)!')
+        : (lang === 'es' ? '✅ ¡Jugada válida de mano / mezcla en mesa!' : '✅ Valid hand meld / table mix!');
       $('btn-confirm-rearrange').disabled = false;
     }
   }
@@ -1166,12 +1372,21 @@
     const nonEmptyGroups = rearrangeGroups.filter(g => g.length > 0);
     const handIdsSet = new Set((gameState.myHand || []).map(c => c.id));
     const usedHandIds = [];
+    const assignedIds = new Set();
     nonEmptyGroups.forEach(g => g.forEach(c => {
+      assignedIds.add(c.id);
       if (handIdsSet.has(c.id)) usedHandIds.push(c.id);
     }));
     const proposedMelds = nonEmptyGroups.map(g => g.map(c => c.id));
+    const offeredId =
+      gameState.phase === 'claiming_offer' &&
+      gameState.claimTurnPlayerId === playerId &&
+      gameState.offeredCard
+        ? gameState.offeredCard.id
+        : null;
+    const offeredIncluded = offeredId !== null && assignedIds.has(offeredId);
 
-    if (gameState.phase === 'claiming_offer') {
+    if (offeredIncluded) {
       sendWS('meld_card', { roomCode, usedHandIds, proposedMelds });
     } else {
       sendWS('rearrange_melds', { roomCode, usedHandIds, proposedMelds });
@@ -1233,14 +1448,14 @@
   function renderRulesBody() {
     $('rules-body').innerHTML = lang === 'es'
       ? `<p><strong>1. Baraja de 40 o 80 Cartas:</strong> No existen el 8 ni el 9 (en poker equivalen a J=10, Q=11, K=12). Por eso el <strong>7 y el 10 (Sota)</strong> van seguidos en las corridas (ej. 6-7-10).</p>
-         <p><strong>2. Escalado Multijugador (2–6 jugadores):</strong> En modo automático, con 2 jugadores se reparten 10 cartas (meta 11); con 3 jugadores en baraja simple se reparten 8 (meta 9); y de 4 a 6 jugadores se usan 2 barajas (80 cartas) para jugar con 10 cartas cada quien (meta 11).</p>
-         <p><strong>3. Turno por Anillo Estricto:</strong> En tu turno volteas una carta de <em>El Mazo</em>. No entra a tu mano: debes bajarla en un juego (tercia/cuarteta o corrida de 3+), aplicarla con <strong>¡Obligado!</strong> o pasar. Si pasas, la prioridad gira alrededor de la mesa uno por uno.</p>
-         <p><strong>4. ¡Obligado!:</strong> Si la carta en mesa cabe en un juego ya bajado de un rival (y le queda al menos 1 carta en mano), ¡puedes obligarlo a tomarla y forzarlo a descartar!</p>
-         <p><strong>5. Tablas:</strong> Si se acaba El Mazo y nadie bajó todas sus cartas, hay empate y <strong>El Pozo se acumula</strong> para la siguiente mano.</p>`
+         <p><strong>2. Conquián Clásico de 9 Cartas (2–6 jugadores):</strong> Por defecto se reparten <strong>8 cartas</strong> a cada jugador y ganas al bajar <strong>9 cartas</strong> (por ejemplo 3 tercias = 9 cartas). De 2 a 3 jugadores usa 1 baraja (40 cartas) y de 4 a 6 jugadores sube a 2 barajas (80 cartas). También puedes elegir el modo largo de 10 cartas (meta 11).</p>
+         <p><strong>3. Bajar y Mezclar Juegos:</strong> Durante tu turno activo (antes de voltear, al decidir por la carta en mesa o antes de descartar), puedes bajar tercias/corridas de tu mano y <strong>mezclar cartas</strong> entre tus juegos en mesa y tu mano sin necesitar la carta volteada.</p>
+         <p><strong>4. Turno por Anillo Estricto y ¡Obligado!:</strong> Si volteas o descartas, la carta pasa uno por uno en sentido horario. Si la carta extiende un juego de un rival, puedes forzarlo con <strong>¡Obligado!</strong> para que la tome y descarte.</p>
+         <p><strong>5. Tablas:</strong> Si se acaba El Mazo sin ganador, hay empate y <strong>El Pozo se acumula</strong> para la siguiente mano.</p>`
       : `<p><strong>1. 40 or 80-Card Spanish Deck:</strong> Ranks run 1 (Ace), 2, 3, 4, 5, 6, 7, 10 (Sota/J), 11 (Caballo/Q), 12 (Rey/K). Notice <strong>7 and 10 are consecutive</strong> in runs (e.g. 6-7-10).</p>
-         <p><strong>2. Multiplayer Scaling (2–6 Players):</strong> Auto mode deals 10 cards (meld 11 to win) for 2 players; 8 cards (meld 9) for 3 players; and automatically upgrades to a Double Deck (80 cards) for 4–6 players so everyone plays full 10-card hands.</p>
-         <p><strong>3. Strict Turn-Order Claim Ring:</strong> On your turn, flip from <em>El Mazo</em>. Cards never go straight into your hand — you must meld them immediately, force them via <strong>¡Obligado!</strong>, or Pass. Priority moves one seat at a time clockwise.</p>
-         <p><strong>4. ¡Obligado! (Forcing):</strong> If the offered card extends an opponent's table meld (and they have ≥1 hand card), you can force them to take it and immediately discard!</p>
+         <p><strong>2. Classic 9-Card Conquián (2–6 Players):</strong> By default everyone is dealt <strong>8 cards</strong> and wins by melding <strong>9 cards</strong> (e.g. 3 sets of 3 = 9 cards). Plays with 1 deck (40 cards) for 2–3 players and upgrades to 2 decks (80 cards) for 4–6 players (optional 10-card / meld 11 mode available).</p>
+         <p><strong>3. Play Hand Melds & Mix Table Sets:</strong> Anytime it is your turn to act (before flipping, while deciding on the offered card, or before discarding), you can lay sets/runs from your hand and <strong>mix cards</strong> across your table melds without taking the offered card.</p>
+         <p><strong>4. Strict Claim Ring & ¡Obligado!:</strong> Flipped and discarded cards rotate clockwise one seat at a time. If an offered card extends an opponent's table meld, you can force them via <strong>¡Obligado!</strong> to take it and discard.</p>
          <p><strong>5. Tablas (Tie Rollover):</strong> If El Mazo runs out with no winner, the hand is a tie and <strong>El Pozo rolls over</strong> into the next round!</p>`;
   }
 

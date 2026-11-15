@@ -51,23 +51,20 @@ impl Default for GameSettings {
 
 /// Resolves `(is_double_deck, hand_size, target_meld_count)` based on player count and deck mode.
 pub fn resolve_scaling(player_count: usize, deck_mode: &str) -> (bool, usize, usize) {
-    if player_count >= 5 {
-        return (true, 10, 11);
-    }
-
     match deck_mode {
-        "double" => (true, 10, 11),
+        "ten" => (player_count >= 4, 10, 11),
+        "double" => (true, 8, 9),
         "single" => match player_count {
-            0..=2 => (false, 10, 11),
-            3 => (false, 8, 9),
-            _ => (false, 7, 8),
+            0..=3 => (false, 8, 9),
+            4 => (false, 7, 8),
+            _ => (true, 8, 9),
         },
         _ => {
-            // "auto"
-            match player_count {
-                0..=2 => (false, 10, 11),
-                3 => (false, 8, 9),
-                _ => (true, 10, 11),
+            // "auto": Classic 9-Card Conquián (deal 8, win with 9 — 3 tercias = 9!)
+            if player_count <= 3 {
+                (false, 8, 9)
+            } else {
+                (true, 8, 9)
             }
         }
     }
@@ -237,8 +234,8 @@ impl Room {
             pot_rolled_over: false,
             round_number: 0,
             is_double_deck: false,
-            hand_size: 10,
-            target_meld_count: 11,
+            hand_size: 8,
+            target_meld_count: 9,
             stock: Vec::new(),
             waste: Vec::new(),
             offered_card: None,
@@ -615,11 +612,13 @@ impl Room {
         used_hand_ids: &[u8],
         proposed_melds: &[Vec<u8>],
     ) -> Result<bool, String> {
-        if self.state != RoomState::Playing || self.phase != TurnPhase::MustDiscard {
-            return Err("Additional hand melds can only be laid before discarding".to_string());
+        if self.state != RoomState::Playing {
+            return Err("Game is not currently active".to_string());
         }
-        if self.must_discard_player_id.as_deref() != Some(player_id) {
-            return Err("Only the player about to discard can rearrange melds".to_string());
+        if self.active_actor_id().as_deref() != Some(player_id) {
+            return Err(
+                "You can only lay hand melds or mix sets during your active turn".to_string(),
+            );
         }
 
         let player = self
@@ -631,6 +630,12 @@ impl Room {
             validate_hand_rearrange(&player.hand, &player.melds, used_hand_ids, proposed_melds)?;
 
         let melded_total: usize = updated_melds.iter().map(|m| m.cards.len()).sum();
+        if remaining_hand.is_empty() && melded_total < self.target_meld_count {
+            return Err(
+                "Must keep at least 1 card in hand until reaching target meld count".to_string(),
+            );
+        }
+
         let actor_name = player.name.clone();
 
         if let Some(p_mut) = self.players.get_mut(player_id) {
@@ -646,7 +651,7 @@ impl Room {
         self.last_notice = Some(ActionNotice {
             kind: "meld".to_string(),
             message_es: format!("{} acomodó sus juegos en la mesa", actor_name),
-            message_en: format!("{} rearranged their table melds", actor_name),
+            message_en: format!("{} arranged their table melds", actor_name),
         });
 
         Ok(false)
@@ -1191,19 +1196,22 @@ mod tests {
 
     #[test]
     fn test_scaling_rules() {
-        assert_eq!(resolve_scaling(2, "auto"), (false, 10, 11));
+        assert_eq!(resolve_scaling(2, "auto"), (false, 8, 9));
         assert_eq!(resolve_scaling(3, "auto"), (false, 8, 9));
-        assert_eq!(resolve_scaling(4, "auto"), (true, 10, 11));
-        assert_eq!(resolve_scaling(5, "auto"), (true, 10, 11));
-        assert_eq!(resolve_scaling(6, "auto"), (true, 10, 11));
+        assert_eq!(resolve_scaling(4, "auto"), (true, 8, 9));
+        assert_eq!(resolve_scaling(5, "auto"), (true, 8, 9));
+        assert_eq!(resolve_scaling(6, "auto"), (true, 8, 9));
 
+        assert_eq!(resolve_scaling(2, "single"), (false, 8, 9));
         assert_eq!(resolve_scaling(3, "single"), (false, 8, 9));
         assert_eq!(resolve_scaling(4, "single"), (false, 7, 8));
-        // Single forced up to double at 5+ players
-        assert_eq!(resolve_scaling(5, "single"), (true, 10, 11));
+        assert_eq!(resolve_scaling(5, "single"), (true, 8, 9));
 
-        assert_eq!(resolve_scaling(2, "double"), (true, 10, 11));
-        assert_eq!(resolve_scaling(3, "double"), (true, 10, 11));
+        assert_eq!(resolve_scaling(2, "double"), (true, 8, 9));
+        assert_eq!(resolve_scaling(3, "double"), (true, 8, 9));
+
+        assert_eq!(resolve_scaling(2, "ten"), (false, 10, 11));
+        assert_eq!(resolve_scaling(4, "ten"), (true, 10, 11));
     }
 
     #[test]
@@ -1362,8 +1370,10 @@ mod tests {
         room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string())
             .unwrap();
         room.start_round().unwrap();
+        assert_eq!(room.hand_size, 8);
+        assert_eq!(room.target_meld_count, 9);
 
-        // Give P1 8 melded cards + 2 hand cards (total 10), target = 11
+        // Give P1 2 tercias (6 melded cards) + 2 hand cards (total 8), target = 9 (3 tercias!)
         room.players.get_mut("p1").unwrap().melds = vec![
             Meld {
                 id: "m1".to_string(),
@@ -1372,7 +1382,6 @@ mod tests {
                     card(1, Suit::Oros, 1),
                     card(11, Suit::Copas, 1),
                     card(21, Suit::Espadas, 1),
-                    card(31, Suit::Bastos, 1),
                 ],
             },
             Meld {
@@ -1382,13 +1391,12 @@ mod tests {
                     card(2, Suit::Oros, 2),
                     card(12, Suit::Copas, 2),
                     card(22, Suit::Espadas, 2),
-                    card(32, Suit::Bastos, 2),
                 ],
             },
         ];
         room.players.get_mut("p1").unwrap().hand =
-            vec![card(5, Suit::Oros, 5), card(6, Suit::Oros, 6)];
-        room.stock = vec![card(7, Suit::Oros, 7)];
+            vec![card(5, Suit::Oros, 5), card(15, Suit::Copas, 5)];
+        room.stock = vec![card(25, Suit::Espadas, 5)];
         room.current_turn_idx = 0;
         room.phase = TurnPhase::AwaitingFlip;
 
@@ -1396,8 +1404,8 @@ mod tests {
         let won = room
             .apply_meld(
                 "p1",
-                &[5, 6],
-                &[vec![1, 11, 21, 31], vec![2, 12, 22, 32], vec![5, 6, 7]],
+                &[5, 15],
+                &[vec![1, 11, 21], vec![2, 12, 22], vec![5, 15, 25]],
                 None,
             )
             .unwrap();
@@ -1406,5 +1414,57 @@ mod tests {
         assert_eq!(room.winner.as_ref().unwrap().id, "p1");
         assert_eq!(room.winner.as_ref().unwrap().pot_won, 10);
         assert_eq!(room.players.get("p1").unwrap().chips, 55);
+    }
+
+    #[test]
+    fn test_hand_meld_and_mix_without_offered_card() {
+        let mut room = Room::new(
+            "MIX01".to_string(),
+            "p1".to_string(),
+            "Ana".to_string(),
+            GameSettings::default(),
+        );
+        room.add_human_player("p2".to_string(), "Beto".to_string(), "c2".to_string())
+            .unwrap();
+        room.start_round().unwrap();
+
+        // 1) During AwaitingFlip, P1 lays a 3-card set straight from hand without an offered card
+        room.players.get_mut("p1").unwrap().melds.clear();
+        room.players.get_mut("p1").unwrap().hand = vec![
+            card(6, Suit::Oros, 6),
+            card(16, Suit::Copas, 6),
+            card(26, Suit::Espadas, 6),
+            card(36, Suit::Bastos, 6),
+            card(4, Suit::Oros, 4),
+            card(5, Suit::Oros, 5),
+            card(31, Suit::Bastos, 1),
+            card(32, Suit::Bastos, 2),
+        ];
+        room.stock = vec![card(29, Suit::Espadas, 12)];
+        room.current_turn_idx = 0;
+        room.phase = TurnPhase::AwaitingFlip;
+
+        let won1 = room
+            .apply_rearrange_melds("p1", &[6, 16, 26, 36], &[vec![6, 16, 26, 36]])
+            .unwrap();
+        assert!(!won1);
+        assert_eq!(room.phase, TurnPhase::AwaitingFlip);
+        assert_eq!(room.players.get("p1").unwrap().melds.len(), 1);
+        assert_eq!(room.players.get("p1").unwrap().hand.len(), 4);
+
+        // 2) Flip an unrelated stock card -> ClaimingOffer -> P1 mixes table 4-card set + 2 hand cards WITHOUT using the offered card
+        room.flip_stock("p1").unwrap();
+        assert_eq!(room.phase, TurnPhase::ClaimingOffer);
+        assert!(room.offered_card.is_some());
+
+        let won2 = room
+            .apply_rearrange_melds("p1", &[4, 5], &[vec![16, 26, 36], vec![4, 5, 6]])
+            .unwrap();
+        assert!(!won2);
+        assert_eq!(room.phase, TurnPhase::ClaimingOffer);
+        assert!(room.offered_card.is_some());
+        assert_eq!(room.players.get("p1").unwrap().melds.len(), 2);
+        assert_eq!(room.players.get("p1").unwrap().melded_count(), 6);
+        assert_eq!(room.players.get("p1").unwrap().hand.len(), 2);
     }
 }

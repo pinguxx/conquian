@@ -13,17 +13,16 @@ A real-time multiplayer web adaptation of the classic Mexican rummy card game **
 ## 🌟 Key Features
 
 1. **Multiplayer Scaling (2–6 Players)**:
-   - **Auto-Scale Mode (Default)**:
-     - **2 players**: 1 Baraja Española (40 cards), 10 cards each, meld **11** to win.
-     - **3 players**: 1 Baraja Española (40 cards), 8 cards each, meld **9** to win.
-     - **4–6 players**: Double Deck (80 cards), full **10-card hands** for every player, meld **11** to win.
-   - Host can also force **Single Deck** (4p plays 7 cards / meld 8) or **Double Deck** for any player count.
+   - **Auto-Scale Classic 9-Card Conquián (Default)**:
+     - **2–3 players**: 1 Baraja Española (40 cards), **8 cards each**, meld **9** to win (e.g. 3 *tercias* = 9 cards).
+     - **4–6 players**: Double Deck (80 cards), **8 cards each**, meld **9** to win.
+   - Host can also force **Single Deck** (4p plays 7 cards / meld 8), **Double Deck** (8 cards / meld 9), or **Extended 10-Card Conquián** (10 cards / meld 11 to win).
 
 2. **Authentic Baraja Española Rules**:
    - Ranks `1 (As), 2, 3, 4, 5, 6, 7, 10 (Sota), 11 (Caballo), 12 (Rey)` — **`7` and `10` are consecutive** in runs (`6-7-10`).
    - Instant visual toggle between traditional **Baraja Española** (*Oros, Copas, Espadas, Bastos*) and **Poker** (`♦ ♥ ♠ ♣`).
    - **Strict Turn-Order Claim Ring**: Priority rotates clockwise around the table one player at a time before any card is burned to *La Basura*.
-   - **Table Meld Rearrangement**: Borrow from your own 4-card melds to form new valid sets or runs.
+   - **Hand Melds & Table Meld Mixing**: Anytime on your active turn (before flipping, while deciding on the offered card, or before discarding), lay sets/runs from your hand and mix cards across your table melds without needing to take the offered card.
    - **⚡ ¡Obligado! (Forcing)**: Force an opponent to take an offered card that extends one of their table melds, forcing them to immediately discard!
    - **🤝 Tablas & El Pozo Rollover**: When *El Mazo* runs out, the hand ends in *Tablas* and *El Pozo* chips roll over into the next deal.
 
