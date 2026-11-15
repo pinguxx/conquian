@@ -1,5 +1,5 @@
 // Service Worker for ¡Conquián Mexicano Online! (PWA)
-const CACHE_NAME = 'conquian-v2';
+const CACHE_NAME = 'conquian-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
